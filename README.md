@@ -19,6 +19,7 @@
 
 1. Run:
 
+   - cd backend
    - npm init -y # '-y' is for default setup
    - npm install express # library is saved in node_modules (Updates package-lock)
    - npm install -D nodemon # '-D' is for devDependencies
@@ -59,6 +60,7 @@
 
 1. Run:
 
+- cd 101472085_comp3123_assignment2_reactjs
 - npm install axios
 
 4. Set up Vercel:
