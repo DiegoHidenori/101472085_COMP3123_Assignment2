@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 // Root route handler
 const rootRoute = async (req, res) => {
@@ -59,13 +60,18 @@ const login = async (req, res) => {
     return res.status(401).json({ status: false, message: 'Invalid username or password' });
   }
 
-  // Check if the hashed password matches
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return res.status(401).json({ status: false, message: 'Invalid password' });
   }
 
-  return res.status(200).json({ status: true, message: 'Login successful.' });
+  const token = jwt.sign(
+    { id: user._id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  return res.status(200).json({ status: true, message: 'Login successful.', token });
 };
 
 module.exports = {

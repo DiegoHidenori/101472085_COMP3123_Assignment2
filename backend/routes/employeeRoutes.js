@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
+const authMiddleware = require('../middlewares/authMiddleware');
 const { 
     rootRoute, 
     getAllEmployees, 
@@ -12,10 +13,11 @@ const {
 
 router.get('/', rootRoute);
 
-router.get('/employees', getAllEmployees);
+router.get('/employees', authMiddleware, getAllEmployees);
 
 router.post(
     '/employees', 
+    authMiddleware,
     [
         body('first_name').notEmpty().withMessage('First name is required'),
         body('last_name').notEmpty().withMessage('Last name is required'),
@@ -28,10 +30,11 @@ router.post(
     createEmployee
 );
 
-router.get('/employees/:eid', getEmployeeById);
+router.get('/employees/:eid', authMiddleware, getEmployeeById);
 
 router.put(
     '/employees/:eid', 
+    authMiddleware,
     [
         body('firstName').optional().notEmpty().withMessage('First name is required'),
         body('lastName').optional().notEmpty().withMessage('Last name is required'),
@@ -44,6 +47,6 @@ router.put(
     updateEmployee
 );
 
-router.delete('/employees', deleteEmployee);
+router.delete('/employees', authMiddleware, deleteEmployee);
 
 module.exports = router;
