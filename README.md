@@ -57,6 +57,10 @@
 
 ## Setting up the frontend project
 
+1. Run:
+
+- npm install axios
+
 4. Set up Vercel:
    - Create vercel.json file
    - Push to GitHub
