@@ -1,24 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const UpdateEmployee = () => {
     const { id } = useParams();
     const [employee, setEmployee] = useState({});
     const navigate = useNavigate();
+    const { token } = useContext(AuthContext);
 
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`)
-            .then((response) => setEmployee(response.data.employee))
-            .catch((error) => console.error("Error fetching employee details:", error));
-    }, [id]);
+        const fetchEmployeeById = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setEmployee(response.data.employee);
+            } catch (error) {
+                console.error("Error fetching employees:", error);
+                alert('Error fetching employee details: ' + error.message);
+            }
+        };
+
+        fetchEmployeeById();
+    }, [token, id]);
 
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`, employee);
-            alert("Employee updated successfully!");
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`, 
+                employee,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+            );
+            alert("Employee updated successfully: " + response.data.employee._id);
             navigate("/employees");
         } catch (error) {
             alert("Failed to update employee.");

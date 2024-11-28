@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
     const navigate = useNavigate();
+    const { token } = useContext(AuthContext);
 
-    // Fetch employees when component mounts
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees`)
-            .then((response) => setEmployees(response.data.employees))
-            .catch((error) => console.error("Error fetching employees:", error));
-    }, []);
+        const fetchEmployees = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setEmployees(response.data.employees);
+            } catch (error) {
+                console.error("Error fetching employees:", error);
+            }
+        };
 
-    const employeeDetails = async (id) => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`);
-            console.log(response.data.employee);
-            navigate(`/employees/${id}`);
-        } catch (error) {
-            console.error("Error fetching employee details:", error);
-        }
+        fetchEmployees();
+    }, [token]);
+
+    const employeeDetails = (id) => {
+        navigate(`/employees/${id}`);
     }
 
-    const editEmployee = async (id) => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees/${id}`);
-            console.log(response.data.employee);
-            navigate(`/employees/edit/${id}`);
-        } catch (error) {
-            console.error("Error fetching employee details:", error);
-        }
+    const editEmployee = (id) => {
+        navigate(`/employees/edit/${id}`);
     };
 
     const deleteEmployee = async (id) => {
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees?eid=${id}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees?eid=${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setEmployees((prev) => prev.filter((emp) => emp._id !== id));
             alert("Employee deleted successfully!");
         } catch (error) {
+            console.error("Error deleting employee:", error);
             alert("Failed to delete employee.");
         }
     };

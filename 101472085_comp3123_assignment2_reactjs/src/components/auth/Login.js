@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -13,9 +14,12 @@ const Login = () => {
         try {
             // No token, just ensure login works
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_USER_URL}/login`, { email, password });
-            if (response.status === 200) {
+            if (response.data.token) {
+                login(response.data.token);
                 alert("Login successful!");
                 navigate(`/employees`);
+            } else {
+                alert("Failed to retrieve token. Please try again.");
             }
         } catch (error) {
             alert("Login failed. Please check your credentials.");

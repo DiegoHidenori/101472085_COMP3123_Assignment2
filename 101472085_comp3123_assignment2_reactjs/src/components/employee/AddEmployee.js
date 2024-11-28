@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const AddEmployee = () => {
     const [ firstName, setFirstName ] = useState("");
@@ -11,22 +12,54 @@ const AddEmployee = () => {
     const [ department, setDepartment ] = useState("");
     const [ date_of_joining, setDateOfJoining ] = useState("");
     const navigate = useNavigate();
+    const [ employee, setEmployee ] = useState(null);
+    const { token } = useContext(AuthContext);
+
+    // const handleAdd = async () => {
+    //     try {
+    //         const response = await axios.post(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //             first_name: firstName,
+    //             last_name: lastName,
+    //             email,
+    //             position,
+    //             salary,
+    //             department,
+    //             date_of_joining: new Date()
+    //         });
+    //         alert('Employee created successfully: ' + response.data.employee_id);
+    //         navigate('/employees');
+    //     } catch (error) {
+    //         console.error("Error fetching employees:", error);
+    //         alert('Error fetching create employee: ' + error.message);
+    //     }
+    // };
 
     const handleAdd = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees`, {
-                first_name: firstName,
-                last_name: lastName,
-                email,
-                position,
-                salary,
-                department,
-                date_of_joining: new Date()
-            });
-            alert("Employee added successfully!");
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_EMP_URL}/employees`, 
+                {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email,
+                    position,
+                    salary,
+                    department,
+                    date_of_joining: new Date()
+                }, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+            );
+            alert('Employee created successfully: ' + response.data.employee_id);
             navigate("/employees");
         } catch (error) {
+            console.error("Error adding employee:", error);
             alert("Failed to add employee.");
         }
     };
