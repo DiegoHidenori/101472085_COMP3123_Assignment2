@@ -83,7 +83,7 @@ const AddEmployee = () => {
                 <input
                     type="text"
                     value={lastName}
-                    onChange={(e) => setEmployee(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                     placeholder="Last Name"
                     required
                     className="form-control"
@@ -94,7 +94,7 @@ const AddEmployee = () => {
                 <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmployee(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     required
                     className="form-control"
@@ -105,7 +105,7 @@ const AddEmployee = () => {
                 <input
                     type="text"
                     value={position}
-                    onChange={(e) => setEmployee(e.target.value)}
+                    onChange={(e) => setPosition(e.target.value)}
                     placeholder="Position"
                     required
                     className="form-control"
@@ -116,7 +116,7 @@ const AddEmployee = () => {
                 <input
                     type="number"
                     value={salary}
-                    onChange={(e) => setEmployee(e.target.value)}
+                    onChange={(e) => setSalary(e.target.value)}
                     placeholder="Salary"
                     required
                     className="form-control"
@@ -127,7 +127,7 @@ const AddEmployee = () => {
                 <input
                     type="text"
                     value={department}
-                    onChange={(e) => setEmployee(e.target.value)}
+                    onChange={(e) => setDepartment(e.target.value)}
                     placeholder="Department"
                     required
                     className="form-control"
