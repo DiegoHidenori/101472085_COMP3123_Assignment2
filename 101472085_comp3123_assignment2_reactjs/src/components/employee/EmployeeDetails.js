@@ -35,15 +35,25 @@ const EmployeeDetails = () => {
     if (!employee) return <p>Loading...</p>;
 
     return (
-        <div>
-            <h2>Employee Details</h2>
-            <p>Name: {employee.first_name} {employee.last_name}</p>
-            <p>Email: {employee.email}</p>
-            <p>Position: {employee.position}</p>
-            <p>Salary: {employee.salary}</p>
-            <p>Department: {employee.department}</p>
+        <div style={styles.div} className="list-group list-group-flush">
+            <h2 className="list-group-item">Employee Details</h2>
+            <p className="list-group-item">Name: {employee.first_name} {employee.last_name}</p>
+            <p className="list-group-item">Email: {employee.email}</p>
+            <p className="list-group-item">Position: {employee.position}</p>
+            <p className="list-group-item">Salary: {employee.salary}</p>
+            <p className="list-group-item">Department: {employee.department}</p>
         </div>
     );
 };
+
+const styles = {
+    div: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "50%"
+    }
+}
 
 export default EmployeeDetails;

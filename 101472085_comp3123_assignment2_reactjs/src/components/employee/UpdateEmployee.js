@@ -46,53 +46,83 @@ const UpdateEmployee = () => {
     };
 
     return (
-        <form onSubmit={handleUpdate}>
+        <form onSubmit={handleUpdate} className="list-group list-group-flush" style={styles.form}>
             <h2>Update Employee</h2>
-            <input
-                type="text"
-                value={employee.first_name || ""}
-                onChange={(e) => setEmployee({ ...employee, first_name: e.target.value })}
-                placeholder="First Name"
-                required
-            />
-            <input
-                type="text"
-                value={employee.last_name || ""}
-                onChange={(e) => setEmployee({ ...employee, last_name: e.target.value })}
-                placeholder="Last Name"
-                required
-            />
-            <input
-                type="email"
-                value={employee.email || ""}
-                onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
-                placeholder="Email"
-                required
-            />
-            <input
-                type="text"
-                value={employee.position || ""}
-                onChange={(e) => setEmployee({ ...employee, position: e.target.value })}
-                placeholder="Position"
-                required
-            />
-            <input
-                type="number"
-                value={employee.salary || ""}
-                onChange={(e) => setEmployee({ ...employee, salary: e.target.value })}
-                placeholder="Salary"
-                required
-            />
-            <input
-                type="text"
-                value={employee.department || ""}
-                onChange={(e) => setEmployee({ ...employee, department: e.target.value })}
-                placeholder="Department"
-                required
-            />
-            <button type="submit">Update Employee</button>
+            <div>
+                <label className="form-label">First Name</label>
+                <input
+                    type="text"
+                    value={employee.first_name || ""}
+                    onChange={(e) => setEmployee({ ...employee, first_name: e.target.value })}
+                    placeholder="First Name"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <div>
+                <label className="form-label">Last Name</label>
+                <input
+                    type="text"
+                    value={employee.last_name || ""}
+                    onChange={(e) => setEmployee({ ...employee, last_name: e.target.value })}
+                    placeholder="Last Name"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <div>
+                <label className="form-label">Email</label>
+                <input
+                    type="email"
+                    value={employee.email || ""}
+                    onChange={(e) => setEmployee({ ...employee, email: e.target.value })}
+                    placeholder="Email"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <div>
+                <label className="form-label">Position</label>
+                <input
+                    type="text"
+                    value={employee.position || ""}
+                    onChange={(e) => setEmployee({ ...employee, position: e.target.value })}
+                    placeholder="Position"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <div>
+                <label className="form-label">Salary</label>
+                <input
+                    type="number"
+                    value={employee.salary || ""}
+                    onChange={(e) => setEmployee({ ...employee, salary: e.target.value })}
+                    placeholder="Salary"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <div>
+                <label className="form-label">Department</label>
+                <input
+                    type="text"
+                    value={employee.department || ""}
+                    onChange={(e) => setEmployee({ ...employee, department: e.target.value })}
+                    placeholder="Department"
+                    required
+                    className="form-control"
+                />
+            </div>
+            <button type="submit" className="btn">Update Employee</button>
         </form>
     );
 };
+
+const styles = {
+    form: {
+        padding: "15px",
+    }
+}
 
 export default UpdateEmployee;

@@ -11,7 +11,7 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5000/api/signup", {
+            await axios.post(`${process.env.REACT_APP_BACKEND_USER_URL}/signup`, {
                 username,
                 email,
                 password,
@@ -24,32 +24,57 @@ const Signup = () => {
     };
 
     return (
-        <form onSubmit={handleSignup}>
-            <h2>Signup</h2>
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-                required
-            />
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-            />
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-            />
-            <button type="submit">Signup</button>
-        </form>
+        <div className="form-material" style={styles.div}>
+            <form onSubmit={handleSignup}>
+                <h2>Signup</h2>
+                <div className="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="example@example.com"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        required
+                    />
+                </div>
+                <div className="d-flex gap-2">
+                    <button type="submit" className="btn btn-primary">Signup</button>
+                    <button onClick={() => navigate("/")} className="btn btn-primary">Log In</button>
+                </div>
+            </form>
+        </div>
     );
 };
+
+const styles = {
+    div: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "50%"
+    }
+}
 
 export default Signup;

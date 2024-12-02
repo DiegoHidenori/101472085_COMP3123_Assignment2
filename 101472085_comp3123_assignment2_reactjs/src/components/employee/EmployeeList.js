@@ -49,10 +49,10 @@ const EmployeeList = () => {
     };
 
     return (
-        <div>
+        <div className="div-center">
             <h1>Employee List</h1>
-            <button onClick={() => navigate("/employees/add")}>Add Employee</button>
-            <table>
+            <button onClick={() => navigate("/employees/add")} className="btn btn-primary">Add Employee</button>
+            <table className="table table-center">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -67,10 +67,10 @@ const EmployeeList = () => {
                                 {emp.first_name} {emp.last_name}
                             </td>
                             <td>{emp.department}</td>
-                            <td>
-                                <button onClick={() => employeeDetails(emp._id)}>Details</button>
-                                <button onClick={() => editEmployee(emp._id)}>Edit</button>
-                                <button onClick={() => deleteEmployee(emp._id)}>Delete</button>
+                            <td className="d-flex gap-2">
+                                <button onClick={() => employeeDetails(emp._id)} className="btn btn-primary">Details</button>
+                                <button onClick={() => editEmployee(emp._id)} className="btn btn-warning">Edit</button>
+                                <button onClick={() => deleteEmployee(emp._id)} className="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                     ))}

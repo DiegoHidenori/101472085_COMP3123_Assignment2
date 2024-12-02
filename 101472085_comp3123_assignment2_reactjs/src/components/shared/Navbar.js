@@ -12,9 +12,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav>
-            <button onClick={() => navigate("/employees")}>Employee List</button>
-            <button onClick={handleLogout}>Logout</button>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <div className="container-fluid">
+                <button onClick={() => navigate("/employees")} className="nav-link active">Employee List</button>
+                <button onClick={handleLogout} className="nav-link active">Logout</button>
+            </div>
         </nav>
     );
 };
