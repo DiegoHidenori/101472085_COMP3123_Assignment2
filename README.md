@@ -1,5 +1,9 @@
 # 101472085_COMP3123_Assignment2
 
+## VERCEL URL
+
+- https://101472085-comp-3123-assignment2.vercel.app
+
 ## GUIDE FOR RUNNING APP IN PRODUCTION
 
 - Frontend:
