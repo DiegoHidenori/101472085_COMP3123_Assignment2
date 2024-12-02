@@ -4,7 +4,7 @@
     {
       "src": "101472085_comp3123_assignment2_reactjs/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
+      "config": { "distDir": "101472085_comp3123_assignment2_reactjs/build" }
     }
   ],
   "routes": [
@@ -14,7 +14,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/build/$1"
+      "dest": "/index.html"
     }
   ]
 }

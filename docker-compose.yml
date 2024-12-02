@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  react:
+    image: nginx:alpine
+    container_name: react-app
+    volumes:
+      - ./101472085_comp3123_assignment2_reactjs/build:/usr/share/nginx/html
+    ports:
+      - "8080:8080"
